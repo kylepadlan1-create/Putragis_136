@@ -1,0 +1,29 @@
+
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local Players = game:GetService("Players")
+
+
+local targetPosition = Vector3.new(543.28, 70.57, -366.10)
+
+
+local function teleportPlayerSevenTimes()
+    local player = Players.LocalPlayer
+    if player and player.Character then
+        local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+        if rootPart then
+            -- Uuulitin ng 7 na beses ang mabilis na pag-teleport
+            for i = 1, 7 do
+                rootPart.CFrame = CFrame.new(targetPosition)
+                task.wait(0.01) -- 0.01 delay para sa bawat teleport
+            end
+        end
+    end
+end
+
+ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+    
+    fireproximityprompt(prompt)
+    
+    
+    teleportPlayerSevenTimes()
+end)
